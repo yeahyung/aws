@@ -26,6 +26,8 @@ repositories {
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
-
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile('org.projectlombok:lombok')
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile('com.h2database:h2') // h2 -> 인메모리 관계형 데이터베이스, 메모리에서 실행되기 때문에 프로젝트가 실행될 때 마다 초기화된다. 주로 로컬에서 테스트 환경에서 사용
+    testCompile('org.springframework.boot:spring-boot-starter-test')
 }
