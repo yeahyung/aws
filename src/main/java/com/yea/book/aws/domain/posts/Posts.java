@@ -1,5 +1,6 @@
 package com.yea.book.aws.domain.posts;
 
+import com.yea.book.aws.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity                 // 테이블과 링크될 클래스임을 나타낸다. 클래스의 카멜케이스 이름을 언더스코어 네이밍으로 테이블 이름을 매칭한다. SalesManager -> sales_manager table
-public class Posts {    // 실제 DB 테이블과 매칭될 클래스
+public class Posts extends BaseTimeEntity {    // 실제 DB 테이블과 매칭될 클래스
 
     @Id                 // 해당 테이블의 PK 필드
     @GeneratedValue(strategy = GenerationType.IDENTITY)
