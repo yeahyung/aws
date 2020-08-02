@@ -95,4 +95,28 @@ public class PostsApiControllerTest {
         assertThat(all.get(0).getContent()).isEqualTo(expectedContent);
 
     }
+
+    @Test
+    public void delete_test(){
+        Posts savedPosts = postsRepository.save(Posts.builder()
+                .title("title")
+                .content("content")
+                .author("author").build());
+
+        Long deleteId = savedPosts.getId();
+
+        List<Posts> beforeDelete = postsRepository.findAll();
+
+        System.out.println("before delete: " + beforeDelete.get(0).getCreatedDate());
+
+        String url = "http://localhost:" + port + "/api/v1/posts/" + deleteId;
+
+        ResponseEntity<Long> responseEntity = restTemplate.exchange(url, HttpMethod.DELETE, null, Long.class);
+
+        List<Posts> afterDelete = postsRepository.findAll();
+
+        System.out.println("after delete: " + afterDelete);
+
+        assertThat(afterDelete.size()).isEqualTo(0);
+    }
 }

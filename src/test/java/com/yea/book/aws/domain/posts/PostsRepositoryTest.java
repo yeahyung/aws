@@ -53,7 +53,7 @@ public class PostsRepositoryTest {
                     .title("title")
                     .content("content")
                     .author("author")
-                    .build());
+                    .build()); 
 
         List<Posts> postsList = postsRepository.findAll();
 
