@@ -1,5 +1,6 @@
 package com.yea.book.aws.web;
 
+import com.yea.book.aws.config.auth.dto.SessionUser;
 import com.yea.book.aws.service.posts.PostsService;
 import com.yea.book.aws.web.dto.PostsResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -8,15 +9,25 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.servlet.http.HttpSession;
+
 @RequiredArgsConstructor
 @Controller        // 그냥 Controller -> html mapping
 public class IndexController {
 
     private final PostsService postsService;
+    private final HttpSession httpSession;
 
     @GetMapping("/")
     public String index(Model model){
         model.addAttribute("posts", postsService.findAllDesc());
+
+        SessionUser user = (SessionUser)httpSession.getAttribute("user");
+
+        if(user != null){
+            model.addAttribute("userName", user.getName());
+        }
+
         return "index";     // src/main/resources/templates/index.mustache
     }
 
